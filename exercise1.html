@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+
+	<h2>Exercise 1</h2>
+	<div class="main">
+	    <ul>
+			<li>
+                <button type="button" onclick= "getAllPosts()" id="allPost">Get All Posts</button>
+            </li>
+            <li>
+                <button type="button" onclick= "getPostTen()" id="PostTen">Get post with id of 10</button>
+            </li>
+            <li>
+                <button type="button" onclick= "getComment()" id="comment">Get the comments from post with id of 12</button>
+            </li>
+            <li>
+                <button type="button" onclick= "getAllPostsUser()" id="postuser">Get all the posts from user with id of 2</button>
+            </li>
+            <li>
+                <button type="button" onclick= "createPost()" id="createPost">Create a new post and log the id generated for it by the server</button>
+            </li>
+        </ul>
+        <div id="mydiv">
+        </div>
+
+	</div>
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript">
+        // 1) Get all posts
+        function getAllPosts(){
+            $.get('https://my-json-server.typicode.com/zachhall/WIN2020_AjaxPromises/posts', function(allposts){
+            console.log(allposts);
+            $('#mydiv').text(JSON.stringify(allposts));
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        // 2) Get post with id of 10
+        function getPostTen(){
+            $.get('https://my-json-server.typicode.com/zachhall/WIN2020_AjaxPromises/posts/10', function(postTen){
+            console.log(postTen);
+            $('#mydiv').text(JSON.stringify(postTen));
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        // 3) Get the comments from post with id of 12 
+        function getComment(){
+            $.get('https://my-json-server.typicode.com/zachhall/WIN2020_AjaxPromises/comments?id=12', function(comment){
+            console.log(comment);
+            $('#mydiv').text(JSON.stringify(comment));
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        // 4) Get all the posts from user with id of 2
+        function getAllPostsUser(){
+            $.get('https://my-json-server.typicode.com/zachhall/WIN2020_AjaxPromises/posts?id=2', function(postuser){
+            console.log(postuser);
+            $('#mydiv').text(JSON.stringify(postuser));
+            });
+        };
+    </script>
+    <script type="text/javascript">
+        // 5) Create a new post and log the id generated for it by the server
+        function createPost(){
+            $.post('https://my-json-server.typicode.com/zachhall/WIN2020_AjaxPromises/posts',{
+            UserId: 15,
+            title: "Test",
+            Body: "Just doing a test"
+            }, function(newPost){
+               console.log(newPost.id);    
+            $('#mydiv').text(JSON.stringify(newPost.id));
+         });     
+        };
+    </script>
+	
+	
+</body>
+</html>
